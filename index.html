@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#0b1728">
+    <meta name="description" content="AES Partner Connect — sample portfolio collaboration and knowledge portal">
+    <title>AES Partner Connect | Portfolio Collaboration Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="shell">
+        <aside class="sidebar" id="sidebar">
+            <div class="brand">
+                <div class="brandmark">A<span>✦</span></div>
+                <div><strong>AES Partner Connect</strong><small>PORTFOLIO COLLABORATION</small></div>
+            </div>
+            <div class="env">● DEMONSTRATION PORTAL</div>
+            <div class="nav-label">WORKSPACE</div>
+            <nav id="nav"><button class="nav-btn active" data-page="overview">◫ <span>Overview</span></button><button
+                    class="nav-btn" data-page="portfolio">▦ <span>Portfolio directory</span></button><button
+                    class="nav-btn" data-page="intake">✚ <span>Request intake</span></button><button class="nav-btn"
+                    data-page="status">◷ <span>Status center</span></button><button class="nav-btn"
+                    data-page="knowledge">▤ <span>Knowledge hub</span></button><button class="nav-btn"
+                    data-page="collaboration">♧ <span>Collaboration</span></button></nav>
+            <div class="sidebar-footer"><span class="dot"></span> Client-side demo · No server<small>Not affiliated with
+                    Westinghouse</small></div>
+        </aside>
+        <main class="main">
+            <header class="top"><button id="menu" aria-label="Toggle menu">☰</button>
+                <div>
+                    <div class="eyebrow">ENGINEERED SOLUTIONS · PARTNER EXPERIENCE</div>
+                    <h1 id="pageTitle">Portfolio overview</h1>
+                </div>
+                <div class="top-actions"><span class="demo-pill">Sample data</span><button class="outline"
+                        id="exportBtn">↓ Export my requests</button><button class="primary" data-go="intake">+ New
+                        request</button></div>
+            </header>
+            <div class="notice">This is a fictional, browser-only demonstration. Requests and comments are stored only
+                on this device; they are <strong>not submitted to any team</strong>. Do not enter sensitive information.
+            </div>
+            <section class="page active" id="overview">
+                <div class="hero">
+                    <div>
+                        <div class="eyebrow">ONE DESTINATION FOR CROSS-PORTFOLIO TEAMS</div>
+                        <h2>Coordinate work.<br><em>See what’s moving.</em></h2>
+                        <p>Discover AES initiatives, request support, follow milestones, and share delivery knowledge
+                            across engineering, manufacturing, operations, and business teams.</p>
+                        <div class="hero-actions"><button class="primary" data-go="portfolio">Explore portfolios
+                                →</button><button class="light" data-go="intake">Submit collaboration request</button>
+                        </div>
+                    </div>
+                    <div class="hero-graphic">
+                        <div class="orb orb1"></div>
+                        <div class="orb orb2"></div>
+                        <div class="floating float1"><span>◆</span> Engineering <b>On track</b></div>
+                        <div class="floating float2"><span>◈</span> Manufacturing <b>In delivery</b></div>
+                        <div class="floating float3"><span>◉</span> Digital enablement <b>Review</b></div>
+                    </div>
+                </div>
+                <div class="stats" id="stats"></div>
+                <div class="two-col">
+                    <div class="panel">
+                        <div class="section-head">
+                            <div>
+                                <h3>Featured initiatives</h3>
+                                <p>Current sample portfolio highlights</p>
+                            </div><button class="textbtn" data-go="portfolio">View all →</button>
+                        </div>
+                        <div id="featured"></div>
+                    </div>
+                    <div class="panel">
+                        <div class="section-head">
+                            <div>
+                                <h3>Upcoming milestones</h3>
+                                <p>Illustrative delivery calendar</p>
+                            </div>
+                        </div>
+                        <div id="milestones"></div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="section-head">
+                        <div>
+                            <h3>How teams collaborate</h3>
+                            <p>A consistent intake-to-delivery experience</p>
+                        </div>
+                    </div>
+                    <div class="steps">
+                        <div><b>01</b>
+                            <h4>Discover</h4>
+                            <p>Find a relevant portfolio and owner.</p>
+                        </div>
+                        <div><b>02</b>
+                            <h4>Request</h4>
+                            <p>Submit scope, priority, and timeline.</p>
+                        </div>
+                        <div><b>03</b>
+                            <h4>Review</h4>
+                            <p>Track triage and delivery stages.</p>
+                        </div>
+                        <div><b>04</b>
+                            <h4>Learn</h4>
+                            <p>Reuse standards and lessons learned.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="page" id="portfolio">
+                <div class="section-head">
+                    <div>
+                        <h2>Portfolio directory</h2>
+                        <p>Explore shared initiatives, dependencies, and partner contact points.</p>
+                    </div>
+                </div>
+                <div class="filters"><input id="portfolioSearch" placeholder="Search portfolio, initiative, or owner…"
+                        aria-label="Search portfolios"><select id="portfolioFilter" aria-label="Filter by domain">
+                        <option value="all">All domains</option>
+                        <option>Engineering</option>
+                        <option>Manufacturing</option>
+                        <option>Digital</option>
+                        <option>Operations</option>
+                    </select></div>
+                <div class="cards" id="portfolioCards"></div>
+                <div class="panel detail" id="portfolioDetail" hidden></div>
+            </section>
+            <section class="page" id="intake">
+                <div class="section-head">
+                    <div>
+                        <h2>Request collaboration or services</h2>
+                        <p>Capture a clear request for partnership, analysis, project controls support, or knowledge
+                            sharing.</p>
+                    </div>
+                </div>
+                <div class="form-layout">
+                    <div class="panel">
+                        <form id="intakeForm">
+                            <div class="form-grid"><label>Request title <span>*</span><input name="title" required
+                                        maxlength="120"
+                                        placeholder="e.g. Integrated milestone review"></label><label>Request type
+                                    <span>*</span><select name="type" required>
+                                        <option value="">Choose type</option>
+                                        <option>Project controls support</option>
+                                        <option>Cross-portfolio collaboration</option>
+                                        <option>Schedule / milestone review</option>
+                                        <option>Resource planning</option>
+                                        <option>Data / reporting request</option>
+                                        <option>Knowledge sharing</option>
+                                        <option>Other</option>
+                                    </select></label><label>Requesting portfolio <span>*</span><select name="portfolio"
+                                        required>
+                                        <option value="">Choose portfolio</option>
+                                        <option>Engineering</option>
+                                        <option>Manufacturing</option>
+                                        <option>Digital</option>
+                                        <option>Operations</option>
+                                        <option>Business / Other</option>
+                                    </select></label><label>Requested priority <span>*</span><select name="priority"
+                                        required>
+                                        <option>Medium</option>
+                                        <option>Low</option>
+                                        <option>High</option>
+                                        <option>Critical</option>
+                                    </select></label><label>Your name <span>*</span><input name="requester" required
+                                        maxlength="80" placeholder="Contact name"></label><label>Work email
+                                    <span>*</span><input name="email" required type="email" maxlength="160"
+                                        placeholder="name@example.com"></label><label>Target date<input
+                                        name="targetDate" type="date"></label><label>Related project <select
+                                        name="project" id="projectSelect">
+                                        <option value="">None / Not sure</option>
+                                    </select></label><label class="wide">Business need / description
+                                    <span>*</span><textarea name="description" required minlength="15" maxlength="1500"
+                                        rows="5"
+                                        placeholder="Describe scope, desired outcomes, stakeholders, dependencies, and business impact…"></textarea></label><label
+                                    class="wide">Dependencies / additional details<textarea name="dependencies"
+                                        maxlength="700" rows="3"
+                                        placeholder="Optional: interfaces, milestones, systems involved…"></textarea></label>
+                            </div>
+                            <div class="form-actions"><button class="primary" type="submit">Save request locally
+                                    →</button><button class="outline" type="reset">Clear form</button></div>
+                        </form>
+                        <div class="success" id="intakeSuccess" hidden role="status"></div>
+                    </div>
+                    <div class="side-help">
+                        <div class="panel">
+                            <h3>What happens next?</h3>
+                            <div class="timeline">
+                                <div><b>01</b><span><strong>Request captured</strong><small>Unique reference created
+                                            locally</small></span></div>
+                                <div><b>02</b><span><strong>Portfolio triage</strong><small>Requires a connected
+                                            workflow in production</small></span></div>
+                                <div><b>03</b><span><strong>Scope and prioritization</strong><small>Owner, capacity, and
+                                            impact review</small></span></div>
+                                <div><b>04</b><span><strong>Delivery and closure</strong><small>Milestone tracking and
+                                            feedback</small></span></div>
+                            </div>
+                        </div>
+                        <div class="tip"><b>Security note</b>
+                            <p>GitHub Pages does not process submissions. This demo saves requests to your browser only.
+                                Connect a secure, authenticated API for shared intake.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="page" id="status">
+                <div class="section-head">
+                    <div>
+                        <h2>Status center</h2>
+                        <p>Look up project milestones and requests you created in this browser.</p>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h3>Find a request or project</h3>
+                    <div class="lookup"><input id="lookupInput"
+                            placeholder="Enter request ID (AES-…) or project ID (PRJ-…)"
+                            aria-label="Reference number"><button id="lookupBtn" class="primary">Check status</button>
+                    </div>
+                    <div id="lookupResult" role="status"></div>
+                </div>
+                <div class="two-col">
+                    <div class="panel">
+                        <div class="section-head">
+                            <div>
+                                <h3>My locally saved requests</h3>
+                                <p>Only requests on this device</p>
+                            </div><button id="clearBtn" class="textbtn danger">Clear local requests</button>
+                        </div>
+                        <div id="myRequests"></div>
+                    </div>
+                    <div class="panel">
+                        <div class="section-head">
+                            <div>
+                                <h3>Project delivery watchlist</h3>
+                                <p>Illustrative statuses, not live systems</p>
+                            </div>
+                        </div>
+                        <div id="watchlist"></div>
+                    </div>
+                </div>
+            </section>
+            <section class="page" id="knowledge">
+                <div class="section-head">
+                    <div>
+                        <h2>Knowledge hub</h2>
+                        <p>Reusable templates, project controls practices, and shared guidance.</p>
+                    </div>
+                </div>
+                <div class="filters"><input id="knowledgeSearch" placeholder="Search playbooks and guides…"
+                        aria-label="Search knowledge"><select id="knowledgeFilter" aria-label="Filter knowledge">
+                        <option value="all">All categories</option>
+                        <option>Governance</option>
+                        <option>Scheduling</option>
+                        <option>Finance</option>
+                        <option>Resources</option>
+                        <option>Collaboration</option>
+                        <option>Analytics</option>
+                    </select></div>
+                <div class="cards knowledge-cards" id="knowledgeCards"></div>
+                <div class="panel detail" id="knowledgeDetail" hidden></div>
+            </section>
+            <section class="page" id="collaboration">
+                <div class="section-head">
+                    <div>
+                        <h2>Collaboration workspace</h2>
+                        <p>Sample cross-team touchpoints and locally saved discussion notes.</p>
+                    </div>
+                </div>
+                <div class="two-col">
+                    <div class="panel">
+                        <h3>Working groups</h3>
+                        <div id="workingGroups"></div><button class="primary" data-go="intake">Request a partnership
+                            →</button>
+                    </div>
+                    <div class="panel">
+                        <h3>Personal collaboration notes</h3>
+                        <p class="muted">Notes stay in this browser. No other team member can see them.</p>
+                        <form id="noteForm"><label>Topic<input name="topic" required maxlength="100"
+                                    placeholder="e.g. Supplier handoff action"></label><label>Note<textarea name="body"
+                                    required maxlength="800" rows="4"
+                                    placeholder="Record actions or follow-up questions…"></textarea></label><button
+                                class="primary" type="submit">Save note locally</button></form>
+                        <div id="notesList"></div>
+                    </div>
+                </div>
+            </section>
+            <footer>Concept demonstration · Fictional AES project information · Not an official Westinghouse application
+                · <button id="resetDemo" class="textbtn">Reset local demo data</button></footer>
+        </main>
+        <button id="chatToggle" aria-label="Open portfolio assistant"><span>✧</span> Ask AES Assistant</button>
+        <section id="chatPanel" class="chat-panel" hidden aria-label="AES assistant">
+            <div class="chat-head">
+                <div class="assistant-avatar">✧</div>
+                <div><strong>AES Portfolio Assistant</strong><small>Local knowledge & navigation · No external
+                        AI</small></div><button id="chatClose" aria-label="Close assistant">×</button>
+            </div>
+            <div id="chatHistory" class="chat-history" aria-live="polite"></div>
+            <div class="suggestions"><button data-question="Show portfolio status">Portfolio status</button><button
+                    data-question="How do I request collaboration?">Request help</button><button
+                    data-question="Explain CPI and SPI">CPI / SPI</button><button
+                    data-question="Find knowledge guides">Knowledge hub</button></div>
+            <form id="chatForm"><input id="chatInput" aria-label="Message assistant"
+                    placeholder="Ask about projects, requests, controls…" required maxlength="400"><button type="submit"
+                    aria-label="Send message">➤</button></form>
+            <div class="chat-disclaimer">Rule-based demonstration assistant. No live data, AI model, or human handoff.
+            </div>
+        </section>
+        <script src="app.js" defer></script>
+    </div>
+</body>
+
+</html>
